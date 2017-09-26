@@ -1,5 +1,6 @@
 from math import sqrt
 from collections import namedtuple
+import tools
 
 
 class kdNode(object):
@@ -84,8 +85,23 @@ def find_nearest(tree, point):
 
         return res(nearest, dist, nodes_visited)
 
-    return travel(tree, point, float("inf"))
+    return travel(tree.root, point, float("inf"))
 
 
 if __name__ == "__main__":
+    train, label = tools.readtrainset('E:/Kaggle/DigitRecog/train.csv')
+    test = tools.readtestset('E:/Kaggle/DigitRecog/test.csv')
 
+    f = open('E:/Kaggle/DigitRecog/submission_kd.csv', 'a')
+    f.write('ImageId,Label\n')
+    n = 1
+    kd = kdTree(train)
+
+    for t in test:
+        ret = find_nearest(kd, t)
+
+        cls = label[train.index(ret.nearest_point)]
+        print(cls)
+        f.write(str(n) + ',' + str(cls) + '\n')
+        n += 1
+    f.close()
