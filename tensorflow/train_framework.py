@@ -19,19 +19,19 @@ def read_csv(batch_size, file_name, record_defaults):
 #计算模型在X上的输出
 def inference(X):
 
-#计算损失
+# 计算损失
 def loss(X, Y):
 
-#读取或生成训练数据X，及期望输出Y
+# 读取或生成训练数据X，及期望输出Y
 def inputs():
 
-#依据计算的总损失训练、调整模型参数
+# 依据计算的总损失训练、调整模型参数
 def train(total_loss):
 
-#对训练得到的模型进行评估
+# 对训练得到的模型进行评估
 def evaluate(sess, X, Y):
 
-#在一个会话中启动数据流图
+# 在一个会话中启动数据流图
 with tf.Session() as sess:
     tf.initialize_all_variables().run()
 
