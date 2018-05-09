@@ -28,7 +28,7 @@ CACHE_DIR = 'tmp/bottleneck/'
 
 # 图片数据文件夹。
 # 在这个文件夹中每一个子文件夹代表一个需要区分的类别，每个子文件夹中存放了对应类别的图片。
-INPUT_DATA = 'G:/数据集/flower_photos/'
+INPUT_DATA = 'G:/数据集/dress_images/'
 
 # 验证的数据百分比
 VALIDATION_PERCENTAGE = 10
@@ -191,7 +191,7 @@ def get_test_bottlenecks(sess, image_lists, n_classes, jpeg_data_tensor, bottlen
             # 通过Inception-v3模型计算图片对应的特征向量，并将其加入最终数据的列表。
             bottleneck = get_or_create_bottleneck(sess, image_lists, label_name, index, category,
                                                   jpeg_data_tensor, bottleneck_tensor)
-            ground_truth = np.zeros(n_classes, dtype = np.float32)
+            ground_truth = np.zeros(n_classes, dtype=np.float32)
             ground_truth[label_index] = 1.0
             bottlenecks.append(bottleneck)
             ground_truths.append(ground_truth)

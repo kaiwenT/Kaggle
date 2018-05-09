@@ -115,7 +115,7 @@ def get_image_path(image_lists, image_dir, label_name, index, category):
 
 # 这个函数通过类别名称、所属数据集和图片编号获取经过Inception-v3模型处理之后的特征向量文件地址。
 def get_bottlenect_path(image_lists, label_name, index, category):
-    return get_image_path(image_lists, CACHE_DIR, label_name, index, category) + '.txt';
+    return get_image_path(image_lists, CACHE_DIR, label_name, index, category) + '.txt'
 
 
 # 这个函数使用加载的训练好的Inception-v3模型处理一张图片，得到这个图片的特征向量。
@@ -143,7 +143,8 @@ def get_or_create_bottleneck(sess, image_lists, label_name, index, category, jpe
         image_path = get_image_path(image_lists, INPUT_DATA, label_name, index, category)
         # 获取图片内容。
         image_data = gfile.FastGFile(image_path, 'rb').read()
-        # print(len(image_data))
+        print(len(image_data))
+        print(image_data)
         # 由于输入的图片大小不一致，此处得到的image_data大小也不一致（已验证），但却都能通过加载的inception-v3模型生成一个2048的特征向量。具体原理不详。
         # 通过Inception-v3模型计算特征向量
         bottleneck_values = run_bottleneck_on_image(sess, image_data, jpeg_data_tensor, bottleneck_tensor)
