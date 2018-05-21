@@ -121,8 +121,9 @@ def cnn_model_fn(features, labels, mode):
             mode=mode, loss=loss, train_op=train_op)
 
     eval_metrics_ops = {
-        'accuracy': tf.metrics.accuracy(
-            labels=labels, predictions=predictions)}
+        # 'accuracy': tf.metrics.accuracy(
+        #     labels=labels, predictions=predictions)}
+        'accuracy': tf.reduce_mean(tf.cast(tf.equal(labels, predictions), tf.float32))}
 
     return tf.estimator.EstimatorSpec(
         mode=mode, loss=loss, eval_metric_ops=eval_metrics_ops)
@@ -167,7 +168,7 @@ def test():
 
     test_images, labels = unpickle('G:/dataset/cifar-10-batches/test_batch')
     eval_data = np.array(test_images, dtype=np.float32)
-    eval_labels = np.array(test_images, dtype=np.int32)
+    eval_labels = np.array(labels, dtype=np.int32)
     eval_input_fn = tf.estimator.inputs.numpy_input_fn(
         x={'x': eval_data},
         y=eval_labels,
@@ -195,7 +196,7 @@ def predict():
 
 
 def main(argv):
-    train()
+    # train()
     test()
 
 
